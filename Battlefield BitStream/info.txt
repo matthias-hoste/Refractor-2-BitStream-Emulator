@@ -1,0 +1,7 @@
+﻿Battlefield 2 Net Build Nr: 353128704(used in ChallengeResponse)
+
+Battlefield 2 event id list:
+
+ChallengeEvent 1
+ChallengeResponseEvent 2
+ConnectionTypeEvent 3
