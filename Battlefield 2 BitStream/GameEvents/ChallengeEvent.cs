@@ -13,22 +13,20 @@ namespace Battlefield_2_BitStream.GameEvents
     {
         public string ModName { get; set; }
         public byte[] Challenge { get; set; }
-        public static ChallengeEvent CreateNewChallenge()
+        public ChallengeEvent()
         {
-            var challengeEvent = new ChallengeEvent();
-            challengeEvent.Challenge = new byte[10];
+            Challenge = new byte[10];
             int v4 = 0;
             var random = new Random();
             do
             {
                 int v5 = random.Next();
-                challengeEvent.Challenge[v4] = (byte)((((v5 - 26 * (1321528399 * v5) >> 32) >> 3) - (v5 >> 31)) + 97);
+                Challenge[v4] = (byte)((((v5 - 26 * (1321528399 * v5) >> 32) >> 3) - (v5 >> 31)) + 97);
                 v4++;
             }
             while (v4 <= 9);
-            challengeEvent.Challenge[9] = 0x00;
-            challengeEvent.ModName = "bf2";
-            return challengeEvent;
+            Challenge[9] = 0x00;
+            ModName = "bf2";
         }
         public void Serialize(IBitStream stream)
         {

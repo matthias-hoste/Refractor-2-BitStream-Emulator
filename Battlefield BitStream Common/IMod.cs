@@ -13,6 +13,7 @@ namespace Battlefield_BitStream_Common
     {
         string Name { get; }
         bool RequiresChallenge { get; }
+        Type ChallengeEvent { get; }
         IBitStreamExtension BitStreamExtension { get; }
         void Initialize(IEventRegistry registry);
         IConFileProcessor GetConFileProcessor();

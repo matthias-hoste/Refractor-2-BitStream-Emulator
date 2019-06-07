@@ -20,6 +20,8 @@ namespace Battlefield_2_BitStream
 
         public bool RequiresChallenge => true;
 
+        public Type ChallengeEvent => typeof(GameEvents.ChallengeEvent);
+
         public ServerInfo ServerSettings { get; private set; }
 
         public IBitStreamExtension BitStreamExtension => null;//bf2 uses the raw bitstream

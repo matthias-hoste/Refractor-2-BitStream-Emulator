@@ -49,8 +49,6 @@
     <Compile Include="Core\Data\PlayerAction.cs" />
     <Compile Include="Core\Data\ServerInfo.cs" />
     <Compile Include="Core\Extensions\ArrayExtensions.cs" />
-    <Compile Include="Core\Game\GameClient.cs" />
-    <Compile Include="Core\Game\GameServer.cs" />
     <Compile Include="Core\Helpers\DevelopmentHelper.cs" />
     <Compile Include="Core\IO\BitStream.cs" />
     <Compile Include="Core\Managers\BlockEventManager.cs" />

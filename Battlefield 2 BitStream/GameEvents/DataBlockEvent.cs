@@ -74,8 +74,8 @@ namespace Battlefield_2_BitStream.GameEvents
             }
             else
             {
-                block.BlockEventId = stream.ReadBits(32);//triggers specific event in EventManager, 1=ClientInfo
-                block.BlockLength = stream.ReadBits(32);//full length of incoming data(in case it's sent in multiple packets
+                block.BlockEventId = stream.ReadBits(32);//triggers specific event in EventManager, 0=ServerInfo, 1=ClientInfo, 5=MapList
+                block.BlockLength = stream.ReadBits(32);//full length of incoming data(in case it's sent in multiple packets)
                 block.NewBlock = true;
             }
             return block;
