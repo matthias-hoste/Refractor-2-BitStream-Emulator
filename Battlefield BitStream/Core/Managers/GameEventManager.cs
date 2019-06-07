@@ -1,4 +1,5 @@
-﻿using Battlefield_2_BitStream.GameEvents;
+﻿using Battlefield_2_BitStream.BlockEvents;
+using Battlefield_2_BitStream.GameEvents;
 using Battlefield_BitStream.Core.IO;
 using Battlefield_BitStream_Common.GameEvents;
 using Battlefield_BitStream_Common.IO;
@@ -15,6 +16,7 @@ namespace Battlefield_BitStream.Core.Managers
     public class GameEventManager : IGameEventManager
     {
         public INetworkingClient Client { get; private set; }
+        private uint SomeValIdkWtfKillMe { get; set; }
         public GameEventManager(INetworkingClient client)
         {
             Client = client;
@@ -27,11 +29,12 @@ namespace Battlefield_BitStream.Core.Managers
             uint numberOfEvents = stream.ReadBits(8);
             uint someVal2 = stream.ReadBits(5);
             uint action2 = stream.ReadBits(1);
+            uint d = 0;
             while (numberOfEvents > 0)
             {
                 try
                 {
-                    IGameEvent eventInstance = ReadGameEvent(stream);
+                    IGameEvent eventInstance = ReadGameEvent(stream, true);
                     eventInstance.Process(Client);
                 }
                 catch (Exception)
@@ -45,7 +48,8 @@ namespace Battlefield_BitStream.Core.Managers
         public void Transmit(IBitStream stream, List<IGameEvent> GameEvents)
         {
             stream.WriteBits((uint)GameEvents.Count, 8);
-            stream.WriteBits(0, 5);
+            stream.WriteBits(SomeValIdkWtfKillMe, 5);
+            SomeValIdkWtfKillMe++;
             stream.WriteBits(0, 1);
             foreach (var gameEvent in GameEvents)
                 WriteGameEvent(stream, gameEvent);
@@ -100,10 +104,19 @@ namespace Battlefield_BitStream.Core.Managers
                 else if (eventId == 39)
                 {
                     eventInstance = new VoteEvent().DeSerialize(stream);
+                    new MapInfoEvent(true).Transmit(Client);
                 }
                 else if (eventId == 42)
                 {
                     eventInstance = new UnlockEvent().DeSerialize(stream);
+                }
+                else if (eventId == 46)
+                {
+                    eventInstance = new ContentCheckEvent().DeSerialize(stream);
+                }
+                else if (eventId == 50)
+                {
+                    eventInstance = null;
                 }
                 else if (eventId == 54)//voip event, we dont care
                 {

@@ -9,30 +9,26 @@ using System.Threading.Tasks;
 
 namespace Battlefield_2_BitStream.GameEvents
 {
-    public class PostRemoteEvent : IGameEvent
+    public class ContentCheckEvent : IGameEvent
     {
-        public void Serialize(IBitStream stream)
+        public void Process(INetworkingClient client)
         {
-            
+            throw new NotImplementedException();
         }
-
         public void Transmit(INetworkingClient client)
         {
             throw new NotImplementedException();
         }
-
-        public void Process(INetworkingClient client)
+        public void Serialize(IBitStream stream)
         {
-
+            throw new NotImplementedException();
         }
-
         public IGameEvent DeSerialize(IBitStream stream)
         {
-            var eventId = stream.ReadBits(4);
-            var subEventId = stream.ReadBits(32);
-            var p3 = stream.ReadBits(32);
-            var p4 = stream.ReadBits(8);
-            return new PostRemoteEvent();
+            var miscHash = stream.ReadBytes(16);
+            var archiveHash = stream.ReadBytes(16);
+            var levelHash = stream.ReadBytes(16);
+            return null;
         }
     }
 }

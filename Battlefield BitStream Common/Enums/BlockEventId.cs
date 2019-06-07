@@ -10,6 +10,7 @@ namespace Battlefield_BitStream_Common.Enums
     {
         ServerInfo = 0,
         ClientInfo = 1,
+        MapInfo = 2,
         MapList = 5
     }
 }

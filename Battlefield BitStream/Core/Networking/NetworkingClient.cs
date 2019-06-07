@@ -48,7 +48,19 @@ namespace Battlefield_BitStream.Core.Networking
 
         private void BlockReceived(IBlockEvent obj)
         {
-            if(obj.BlockEventId == BlockEventId.ServerInfo)
+            if(obj.BlockEventId == BlockEventId.ClientInfo)//when we receive this we must send the player database with the current player in it
+            {
+                var createPlayerEvent = new CreatePlayerEvent();
+                createPlayerEvent.PlayerId = 1;
+                createPlayerEvent.PlayerIndex = 0;
+                createPlayerEvent.PlayerName = "LifeCoder";
+                createPlayerEvent.IsAI = false;
+                createPlayerEvent.PlayerTeam = 2;
+                createPlayerEvent.SpawnGroup = 0;
+                SendEvent(createPlayerEvent);
+                Send();
+            }
+            else if(obj.BlockEventId == BlockEventId.ServerInfo)
             {
                 Config.ServerInfo = obj;
             }
@@ -210,8 +222,6 @@ namespace Battlefield_BitStream.Core.Networking
         }
         private void Send(string hex)
         {
-            if (ParentServer == null)
-                return;
             lock (this)
             {
                 IBitStream stream = new BitStream(DevelopmentHelper.ParseHexString(hex));//create new bitstream
@@ -220,7 +230,7 @@ namespace Battlefield_BitStream.Core.Networking
                 Console.WriteLine("Sent, type 1: " + Convert.ToString(ServerPacketId) + ", type 2: " + Convert.ToString(ClientPacketId) + ", type 3: " + v54);
                 ServerPacketId++;
                 ParentServer.Send(stream.GetRawBuffer(), RemoteEndPoint);
-                Console.WriteLine("[NetworkingClient - " + RemoteEndPoint.ToString() + "] sent packet type " + Convert.ToString(PacketType.Data) + " (as hex)");
+                Console.WriteLine("[NetworkingClient - " + RemoteEndPoint.ToString() + "] sent packet type " + Convert.ToString(PacketType.Data));
             }
         }
         public void SetAuthenticated(bool authenticated)
@@ -228,10 +238,12 @@ namespace Battlefield_BitStream.Core.Networking
             IsAuthenticated = authenticated;
             if(IsAuthenticated)
             {
-                Send("6f200803000000cf001204840000000041010000043f1a003d484d3d2048616c6c2d4d616e6961204d6978205365727665720100e3003d484d3d2048616c6c2d4d616e6961204d697820536572766572202870726f043f7669646564206279206266326c2e6465297c2020202020202020202020202020202020202020202020202056656869636c653a204d6f202b20446f7c202020043f2020202020202020202020496e66616e747269653a204469202b204d69202b204672202b205361202b20536f7c7c20202020202020202020486f6d6570616700");
-                Send("6f3008030000008d000e08043f653a20687474703a2f2f7777772e68616c6c2d6d616e69612e64657c2020202020202020202020205465616d737065616b333a203231322e3232342e38342e043f36383a39313334cf00000080a4eca36c03000000693a06000000060000001e000080110090000000c003000000a30200001900000019000060320000001000040600003200000020");
-                Send("6f400803000000cf00120c84050000000d010000043f0a00000009006b756272615f64616d060067706d5f637140000c0064616c69616e5f706c616e74060067706d5f637140001100726f61645f746f5f6a616c61043f6c61626164060067706d5f637140001000646171696e675f6f696c6669656c6473060067706d5f637140000c0067756c665f6f665f6f6d616e060067706d5f043f637140000d006d617368747575725f63697479060067706d5f637140000d007461726162615f717561727279060067706d5f6371400014006f70657261746900");
-                Send("6f60100f00000023011a14043f6f6e736d6f6b6573637265656e060067706d5f6371400010006f7065726174696f6e68617276657374060067706d5f637140001100737472696b655f61745f04116b61726b616e64060067706d5f63714000840000000041010000043f1a003d484d3d2048616c6c2d4d616e6961204d6978205365727665720100e3003d484d3d2048616c6c2d4d616e6961204d697820536572766572202870726f043f7669646564206279206266326c2e6465297c2020202020202020202020202020202020202020202020202056656869636c653a204d6f202b20446f7c202020043f2020202020202020202020496e66616e747269653a204469202b204d69202b204672202b205361202b20536f7c7c20202020202020202020486f6d6570616700");
+                if (Config.ServerInfo != null)//something goes wrong in the transmission, client doesnt handle the packets and disconnects
+                {
+                    Config.ServerInfo.Transmit(this);
+                    //new ServerInfoEvent().Transmit(this);
+                    new MapListEvent(true).Transmit(this);
+                }
             }
         }
     }

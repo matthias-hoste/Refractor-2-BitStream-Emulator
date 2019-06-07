@@ -21,6 +21,7 @@ namespace Battlefield_2_BitStream.GameEvents
         public uint SpawnGroup { get; set; }//also 0 from what I saw
         public void Serialize(IBitStream stream)
         {
+            stream.WriteBits(5, 7);
             stream.WriteBits(PlayerTeam, 3);
             stream.WriteBits(SpawnGroup, 4);
             stream.WriteBits(0, 1);

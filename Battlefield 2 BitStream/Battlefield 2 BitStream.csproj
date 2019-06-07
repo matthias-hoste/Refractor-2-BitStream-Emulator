@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BlockEvents\ClientInfoEvent.cs" />
+    <Compile Include="BlockEvents\MapInfoEvent.cs" />
     <Compile Include="BlockEvents\MapListEvent.cs" />
     <Compile Include="BlockEvents\ServerInfoEvent.cs" />
     <Compile Include="Data\ConMethods.cs" />
@@ -50,6 +51,7 @@
     <Compile Include="GameEvents\ChallengeEvent.cs" />
     <Compile Include="GameEvents\ChallengeResponseEvent.cs" />
     <Compile Include="GameEvents\ConnectionTypeEvent.cs" />
+    <Compile Include="GameEvents\ContentCheckEvent.cs" />
     <Compile Include="GameEvents\CreatePlayerEvent.cs" />
     <Compile Include="GameEvents\DataBlockEvent.cs" />
     <Compile Include="GameEvents\DestroyObjectEvent.cs" />
