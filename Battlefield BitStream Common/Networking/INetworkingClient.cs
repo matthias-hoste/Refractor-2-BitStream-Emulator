@@ -19,6 +19,7 @@ namespace Battlefield_BitStream_Common.Networking
         void SendPingResponse(uint token);
         void SendEvent(IGameEvent gameEvent);
         void Send();
+        void Send(string hex);
         void SetAuthenticated(bool authenticated);
     }
 }

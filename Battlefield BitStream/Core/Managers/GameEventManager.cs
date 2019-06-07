@@ -89,6 +89,10 @@ namespace Battlefield_BitStream.Core.Managers
                 {
                     eventInstance = new CreatePlayerEvent().DeSerialize(stream);
                 }
+                else if (eventId == 6)
+                {
+                    eventInstance = new CreateObjectEvent().DeSerialize(stream);
+                }
                 else if (eventId == 8)
                 {
                     eventInstance = new DestroyObjectEvent().DeSerialize(stream);
@@ -100,6 +104,15 @@ namespace Battlefield_BitStream.Core.Managers
                 else if (eventId == 16)
                 {
                     eventInstance = new StringBlockEvent().DeSerialize(stream);
+                }
+                else if (eventId == 31)
+                {
+                    eventInstance = new CreateKitEvent().DeSerialize(stream);
+                }
+                else if (eventId == 35)//voip event
+                {
+                    stream.ReadBits(9);//just read so we can skip
+                    eventInstance = null;
                 }
                 else if (eventId == 39)
                 {

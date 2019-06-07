@@ -52,6 +52,8 @@
     <Compile Include="GameEvents\ChallengeResponseEvent.cs" />
     <Compile Include="GameEvents\ConnectionTypeEvent.cs" />
     <Compile Include="GameEvents\ContentCheckEvent.cs" />
+    <Compile Include="GameEvents\CreateKitEvent.cs" />
+    <Compile Include="GameEvents\CreateObjectEvent.cs" />
     <Compile Include="GameEvents\CreatePlayerEvent.cs" />
     <Compile Include="GameEvents\DataBlockEvent.cs" />
     <Compile Include="GameEvents\DestroyObjectEvent.cs" />

@@ -220,7 +220,7 @@ namespace Battlefield_BitStream.Core.Networking
                 SendPingRequest();
             }
         }
-        private void Send(string hex)
+        public void Send(string hex)
         {
             lock (this)
             {
