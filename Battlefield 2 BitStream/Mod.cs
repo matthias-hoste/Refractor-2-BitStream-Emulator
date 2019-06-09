@@ -26,6 +26,8 @@ namespace Battlefield_2_BitStream
 
         public IBitStreamExtension BitStreamExtension => null;//bf2 uses the raw bitstream
 
+        private static IConFileProcessor _instance { get; set; }
+
         public Mod()
         {
             Instance = this;
@@ -34,7 +36,9 @@ namespace Battlefield_2_BitStream
 
         public IConFileProcessor GetConFileProcessor()
         {
-            return new ConFileProcessor();
+            if (_instance == null)
+                _instance = new ConFileProcessor();
+            return _instance;
         }
 
         public void Initialize(IEventRegistry registry)

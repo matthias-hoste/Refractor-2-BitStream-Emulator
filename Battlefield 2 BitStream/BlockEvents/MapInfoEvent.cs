@@ -19,6 +19,10 @@ namespace Battlefield_2_BitStream.BlockEvents
         public uint CommanderEnabled { get; set; }
         public uint ChallengeOrdinal { get; set; }
         public BlockEventId BlockEventId => BlockEventId.MapInfo;
+        public MapInfoEvent()
+        {
+
+        }
         public MapInfoEvent(bool make = false)
         {
             if(make)

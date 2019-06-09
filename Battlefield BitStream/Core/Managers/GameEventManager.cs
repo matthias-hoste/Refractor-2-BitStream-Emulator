@@ -117,7 +117,6 @@ namespace Battlefield_BitStream.Core.Managers
                 else if (eventId == 39)
                 {
                     eventInstance = new VoteEvent().DeSerialize(stream);
-                    new MapInfoEvent(true).Transmit(Client);
                 }
                 else if (eventId == 42)
                 {

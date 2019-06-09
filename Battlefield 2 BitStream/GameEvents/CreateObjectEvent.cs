@@ -28,13 +28,13 @@ namespace Battlefield_2_BitStream.GameEvents
 
         public IGameEvent DeSerialize(IBitStream stream)
         {
-            var v1 = stream.ReadBits(0x20);
-            var v2 = stream.ReadBits(0x10);
+            var templateId = stream.ReadBits(0x20);
+            var objectId = stream.ReadBits(0x10);
             var v3 = stream.ReadBits(2);
-            var v4 = stream.ReadBits(1);
-            if(v4 == 1)
+            var isMultiSpawn = stream.ReadBits(1);//if true means spawn the same object multiple times
+            if(isMultiSpawn == 1)
             {
-
+                var spawnAmount = stream.ReadBits(8);
             }
             else
             {

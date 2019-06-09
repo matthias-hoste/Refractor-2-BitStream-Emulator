@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Battlefield 2 BitStream", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Battlefield BitStream Common", "Battlefield BitStream Common\Battlefield BitStream Common.csproj", "{933C37F3-3886-4052-9F6A-6E3AB3665AEC}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{111F857A-4318-4722-9AF1-2831F7E09F26}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VFS", "VFS\VFS.csproj", "{7DBA4CC5-645D-4514-ADD6-685EDA4F361D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,9 +59,24 @@ Global
 		{933C37F3-3886-4052-9F6A-6E3AB3665AEC}.Release|x64.Build.0 = Release|Any CPU
 		{933C37F3-3886-4052-9F6A-6E3AB3665AEC}.Release|x86.ActiveCfg = Release|Any CPU
 		{933C37F3-3886-4052-9F6A-6E3AB3665AEC}.Release|x86.Build.0 = Release|Any CPU
+		{7DBA4CC5-645D-4514-ADD6-685EDA4F361D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7DBA4CC5-645D-4514-ADD6-685EDA4F361D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7DBA4CC5-645D-4514-ADD6-685EDA4F361D}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{7DBA4CC5-645D-4514-ADD6-685EDA4F361D}.Debug|x64.Build.0 = Debug|Any CPU
+		{7DBA4CC5-645D-4514-ADD6-685EDA4F361D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{7DBA4CC5-645D-4514-ADD6-685EDA4F361D}.Debug|x86.Build.0 = Debug|Any CPU
+		{7DBA4CC5-645D-4514-ADD6-685EDA4F361D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7DBA4CC5-645D-4514-ADD6-685EDA4F361D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7DBA4CC5-645D-4514-ADD6-685EDA4F361D}.Release|x64.ActiveCfg = Release|Any CPU
+		{7DBA4CC5-645D-4514-ADD6-685EDA4F361D}.Release|x64.Build.0 = Release|Any CPU
+		{7DBA4CC5-645D-4514-ADD6-685EDA4F361D}.Release|x86.ActiveCfg = Release|Any CPU
+		{7DBA4CC5-645D-4514-ADD6-685EDA4F361D}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7DBA4CC5-645D-4514-ADD6-685EDA4F361D} = {111F857A-4318-4722-9AF1-2831F7E09F26}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CC4E2916-10DE-422C-816F-2889153A458E}

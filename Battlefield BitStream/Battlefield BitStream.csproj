@@ -47,7 +47,9 @@
     <Compile Include="Config.cs" />
     <Compile Include="Core\Data\ClientInfo.cs" />
     <Compile Include="Core\Data\PlayerAction.cs" />
+    <Compile Include="Core\Data\RemoteEvent.cs" />
     <Compile Include="Core\Data\ServerInfo.cs" />
+    <Compile Include="Core\Engine\BF2Engine.cs" />
     <Compile Include="Core\Extensions\ArrayExtensions.cs" />
     <Compile Include="Core\Helpers\DevelopmentHelper.cs" />
     <Compile Include="Core\IO\BitStream.cs" />
@@ -56,6 +58,7 @@
     <Compile Include="Core\Managers\GameEventManager.cs" />
     <Compile Include="Core\Managers\GhostManager.cs" />
     <Compile Include="Core\Managers\PlayerActionManager.cs" />
+    <Compile Include="Core\Managers\RemoteEventManager.cs" />
     <Compile Include="Core\Networking\NetworkingClient.cs" />
     <Compile Include="Core\Networking\NetworkingServer.cs" />
     <Compile Include="Core\Registry\GameEventRegistry.cs" />
@@ -75,6 +78,10 @@
     <ProjectReference Include="..\Battlefield BitStream Common\Battlefield BitStream Common.csproj">
       <Project>{933C37F3-3886-4052-9F6A-6E3AB3665AEC}</Project>
       <Name>Battlefield BitStream Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VFS\VFS.csproj">
+      <Project>{7dba4cc5-645d-4514-add6-685eda4f361d}</Project>
+      <Name>VFS</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

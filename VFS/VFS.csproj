@@ -4,12 +4,12 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{933C37F3-3886-4052-9F6A-6E3AB3665AEC}</ProjectGuid>
+    <ProjectGuid>{7DBA4CC5-645D-4514-ADD6-685EDA4F361D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Battlefield_BitStream_Common</RootNamespace>
-    <AssemblyName>Battlefield BitStream Common</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <RootNamespace>VFS</RootNamespace>
+    <AssemblyName>VFS</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
@@ -33,6 +33,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.IO.Compression" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -41,24 +42,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Enums\BlockEventId.cs" />
-    <Compile Include="Enums\PacketType.cs" />
-    <Compile Include="GameEvents\IBlockEvent.cs" />
-    <Compile Include="GameEvents\IEventRegistry.cs" />
-    <Compile Include="GameEvents\IGameEvent.cs" />
-    <Compile Include="IMod.cs" />
-    <Compile Include="IO\IBitStream.cs" />
-    <Compile Include="IO\IBitStreamExtension.cs" />
-    <Compile Include="Managers\IBlockEventManager.cs" />
-    <Compile Include="Managers\IDataBlockManager.cs" />
-    <Compile Include="Managers\IGameEventManager.cs" />
-    <Compile Include="Managers\IRemoteEventManager.cs" />
-    <Compile Include="Networking\INetworkingClient.cs" />
-    <Compile Include="Processors\IConFileProcessor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Data\" />
+    <Compile Include="VFile.cs" />
+    <Compile Include="VFileSystem.cs" />
+    <Compile Include="VFileSystemManager.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

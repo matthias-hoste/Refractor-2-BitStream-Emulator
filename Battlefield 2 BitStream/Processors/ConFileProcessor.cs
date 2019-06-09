@@ -10,10 +10,10 @@ namespace Battlefield_2_BitStream.Processors
 {
     public class ConFileProcessor : IConFileProcessor//this is a big fat headache
     {
-        private Dictionary<string, Func<object, int>> registeredMethods { get; set; }
+        private Dictionary<string, Func<object, object, int>> registeredMethods { get; set; }
         public ConFileProcessor()
         {
-            registeredMethods = new Dictionary<string, Func<object, int>>();
+            registeredMethods = new Dictionary<string, Func<object, object, int>>();
         }
         public void ExecuteConFile(string file)
         {
@@ -21,6 +21,10 @@ namespace Battlefield_2_BitStream.Processors
             foreach(var command in commands)
             {
                 var data = command.Split(' ');
+                if (string.IsNullOrEmpty(data[0]) || string.IsNullOrWhiteSpace(data[0]))
+                    continue;
+                if (data[0].StartsWith("rem"))
+                    continue;
                 if (!registeredMethods.ContainsKey(data[0]))
                 {
                     Console.WriteLine("[CONPROCESSOR] Unknown con function: " + command);
@@ -36,11 +40,25 @@ namespace Battlefield_2_BitStream.Processors
                             break;
                     }
                 }
-                registeredMethods[data[0]](variable1);
+                string variable2 = null;
+                if(data.Length > 2)
+                {
+                    variable2 = data[2];
+                    if (variable2.StartsWith(Convert.ToString('"')))
+                    {
+                        for (int i = 2; i < data.Length; i++)
+                        {
+                            variable2 += data[i];
+                            if (data[i].EndsWith(Convert.ToString('"')))
+                                break;
+                        }
+                    }
+                }
+                registeredMethods[data[0]](variable1, variable2);
             }
         }
 
-        public void RegisterConMethod(string name, Func<object, int> method)
+        public void RegisterConMethod(string name, Func<object, object, int> method)
         {
             if (registeredMethods.ContainsKey(name))
                 return;

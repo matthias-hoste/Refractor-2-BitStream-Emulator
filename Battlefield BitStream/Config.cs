@@ -1,4 +1,5 @@
-﻿using Battlefield_BitStream.Core.Registry;
+﻿using Battlefield_BitStream.Core.Engine;
+using Battlefield_BitStream.Core.Registry;
 using Battlefield_BitStream_Common;
 using Battlefield_BitStream_Common.GameEvents;
 using Battlefield_BitStream_Common.Processors;
@@ -10,6 +11,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using VFS;
 
 namespace Battlefield_BitStream
 {
@@ -17,6 +19,7 @@ namespace Battlefield_BitStream
     {
         internal static string ModName { get; private set; }
         internal static string GamePassword { get; private set; }
+        internal static BF2Engine BF2Engine { get; private set; }
         internal static IEventRegistry EventRegistry { get; set; }
         internal static IMod LoadedMod { get; private set; }
         internal static Assembly ModAssembly { get; private set; }
@@ -30,7 +33,7 @@ namespace Battlefield_BitStream
                 for(int i = 0; i < args.Length; i++)
                 {
                     if (args[i] == "--mod" && Directory.Exists(Path.Combine(Application.StartupPath, "mods", args[i + 1])))
-                        ModName = args[i + 1];                        
+                        ModName = args[i + 1];
                 }
             }
             EventRegistry = new GameEventRegistry();
@@ -38,8 +41,9 @@ namespace Battlefield_BitStream
             {
                 Console.WriteLine("No mod was defined, which mod would you like to load?");
                 var directories = Directory.EnumerateDirectories(Path.Combine(Application.StartupPath, "mods")).Select(d => new DirectoryInfo(d).Name);
-                foreach (var game in directories)
-                    Console.WriteLine(game);
+                for (int i = 0; i < directories.Count(); i++)
+                    Console.WriteLine("[" + i + "] " + directories.ToArray()[i]);
+                Console.Write(">");
                 var mod = Console.ReadLine();
                 if(!directories.Contains(mod))
                 {
@@ -52,6 +56,11 @@ namespace Battlefield_BitStream
                 LoadedMod = (IMod)Activator.CreateInstance(ModAssembly.GetTypes().Where(x => x.GetInterfaces().Contains(typeof(IMod))).First());
                 ConFileProcessor = LoadedMod.GetConFileProcessor();
             }
+            LoadedMod.Initialize(EventRegistry);
+            Console.WriteLine("Loaded " + LoadedMod.Name);
+            BF2Engine = new BF2Engine();
+            BF2Engine.InitEngine();
+            BF2Engine.LoadServerArchives();
         }
     }
 }

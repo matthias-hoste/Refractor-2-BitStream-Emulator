@@ -50,7 +50,7 @@ namespace Battlefield_BitStream.Core.Networking
 
         private void BlockReceived(IBlockEvent obj)
         {
-            if(obj.BlockEventId == BlockEventId.ClientInfo)//when we receive this we must send the player database with the current player in it
+            if(obj.BlockEventId == BlockEventId.ClientInfo)//when we receive this we must send the player database with the current player in it and the info for the map to be loaded
             {
                 var createPlayerEvent = new CreatePlayerEvent();
                 createPlayerEvent.PlayerId = 1;
@@ -60,7 +60,11 @@ namespace Battlefield_BitStream.Core.Networking
                 createPlayerEvent.PlayerTeam = 2;
                 createPlayerEvent.SpawnGroup = 0;
                 SendEvent(createPlayerEvent);
+                new MapInfoEvent(true).Transmit(this);
                 Send();
+                //now we wait until the client finished loading the map
+                //top id is 6, which is NetworkEvent, bottom id is 2 which is loadLevelComplete in NetworkEvent
+                RemoteEventManager.AddEventHandler(6, 2, OnClientLoadComplete);
             }
             else if(obj.BlockEventId == BlockEventId.ServerInfo)
             {
@@ -189,23 +193,29 @@ namespace Battlefield_BitStream.Core.Networking
                     IBitStream stream = BitStream.Create();//create new bitstream
                     stream.WriteBasicHeader(15, ConnectionId);//write packet type and client id
                     stream.WriteExtendedHeader(ServerPacketId, ClientPacketId, (uint)v54);//write packet identifiers
-                    Console.WriteLine("Sent, type 1: " + Convert.ToString(ServerPacketId) + ", type 2: " + Convert.ToString(ClientPacketId) + ", type 3: " + v54);
                     ServerPacketId++;
                     var position = stream.GetPosition();
                     stream.SkipBits(16);
                     stream.WriteBits(0, 1);//playeractionmanager
-                    stream.WriteBits(1, 1);
-                    lock (GameEvents)
+                    if (GameEvents.Count > 0)
                     {
-                        List<IGameEvent> events = new List<IGameEvent>();
-                        for (int i = 4; i > 0; i--)
+                        stream.WriteBits(1, 1);
+                        lock (GameEvents)
                         {
-                            IGameEvent gameEvent;
-                            if (!GameEvents.TryDequeue(out gameEvent))
-                                break;
-                            events.Add(gameEvent);
+                            List<IGameEvent> events = new List<IGameEvent>();
+                            for (int i = 4; i > 0; i--)
+                            {
+                                IGameEvent gameEvent;
+                                if (!GameEvents.TryDequeue(out gameEvent))
+                                    break;
+                                events.Add(gameEvent);
+                            }
+                            GameEventManager.Transmit(stream, events);
                         }
-                        GameEventManager.Transmit(stream, events);
+                    }
+                    else
+                    {
+                        stream.WriteBits(0, 1);
                     }
                     stream.WriteBits(0, 1);//ghostmanager
                     var lastPosition = stream.GetPosition();
@@ -229,7 +239,6 @@ namespace Battlefield_BitStream.Core.Networking
                 IBitStream stream = new BitStream(DevelopmentHelper.ParseHexString(hex));//create new bitstream
                 stream.WriteBasicHeader(15, ConnectionId);//write packet type and client id
                 stream.WriteExtendedHeader(ServerPacketId, ClientPacketId, (uint)v54);//write packet identifiers
-                Console.WriteLine("Sent, type 1: " + Convert.ToString(ServerPacketId) + ", type 2: " + Convert.ToString(ClientPacketId) + ", type 3: " + v54);
                 ServerPacketId++;
                 ParentServer.Send(stream.GetRawBuffer(), RemoteEndPoint);
                 Console.WriteLine("[NetworkingClient - " + RemoteEndPoint.ToString() + "] sent packet type " + Convert.ToString(PacketType.Data));
@@ -240,13 +249,17 @@ namespace Battlefield_BitStream.Core.Networking
             IsAuthenticated = authenticated;
             if(IsAuthenticated)
             {
-                if (Config.ServerInfo != null)//something goes wrong in the transmission, client doesnt handle the packets and disconnects
+                if (Config.ServerInfo != null)
                 {
                     Config.ServerInfo.Transmit(this);
                     //new ServerInfoEvent().Transmit(this);
                     new MapListEvent(true).Transmit(this);
                 }
             }
+        }
+        public uint OnClientLoadComplete(uint a1, uint a2)
+        {
+            return 0;
         }
     }
 }

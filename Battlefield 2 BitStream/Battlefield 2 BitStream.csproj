@@ -9,9 +9,10 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Battlefield_2_BitStream</RootNamespace>
     <AssemblyName>Battlefield 2 BitStream</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -33,6 +34,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -69,6 +71,10 @@
     <ProjectReference Include="..\Battlefield BitStream Common\Battlefield BitStream Common.csproj">
       <Project>{933C37F3-3886-4052-9F6A-6E3AB3665AEC}</Project>
       <Name>Battlefield BitStream Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\VFS\VFS.csproj">
+      <Project>{7dba4cc5-645d-4514-add6-685eda4f361d}</Project>
+      <Name>VFS</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
