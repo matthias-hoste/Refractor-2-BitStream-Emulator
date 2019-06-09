@@ -55,6 +55,8 @@ namespace Battlefield_2_BitStream.BlockEvents
         }
         public void Serialize(IBitStream stream)//datablock events are different from game events, but not much
         {
+            GameName = "LifeCoder's";
+            GameDescription = "I did it biiiitch";
             stream.WriteBits((uint)GameName.Length, 0x10);
             stream.WriteString(GameName, (uint)GameName.Length);
             stream.WriteBits(1, 0x10);

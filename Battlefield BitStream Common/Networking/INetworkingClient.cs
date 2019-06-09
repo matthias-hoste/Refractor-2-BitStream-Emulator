@@ -12,6 +12,7 @@ namespace Battlefield_BitStream_Common.Networking
 {
     public interface INetworkingClient
     {
+        IRemoteEventManager RemoteEventManager { get; }
         IDataBlockManager BlockManager { get; }
         bool IsConnected { get; }
         void Handle(PacketType packetType, IBitStream stream);

@@ -22,6 +22,7 @@ namespace Battlefield_BitStream.Core.Networking
     {
         public NetworkingServer ParentServer { get; private set; }
         public IDataBlockManager BlockManager { get; private set; }
+        public IRemoteEventManager RemoteEventManager { get; private set; }
         public IGameEventManager GameEventManager { get; private set; }
         public IPEndPoint RemoteEndPoint { get; private set; }
         public uint ConnectionId { get; private set; }
@@ -42,6 +43,7 @@ namespace Battlefield_BitStream.Core.Networking
             RemoteEndPoint = endPoint;
             GameEvents = new ConcurrentQueue<IGameEvent>();
             BlockManager = new DataBlockManager(this);
+            RemoteEventManager = new RemoteEventManager(this);
             GameEventManager = new GameEventManager(this);
             BlockManager.BlockReceived += BlockReceived;
         }
