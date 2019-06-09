@@ -20,6 +20,7 @@ namespace Battlefield_2_BitStream.Data
             processor.RegisterConMethod("sv.allowFreeCam", SetAllowFreeCam);
             processor.RegisterConMethod("sv.allowExternalViews", SetAllowExternalViews);
             processor.RegisterConMethod("fileManager.mountArchive", MountArchive);
+            processor.RegisterConMethod("ObjectTemplate.create", CreateObjectTemplate);
         }
         public static int SetServerName(object variable, object variable2)
         {
@@ -55,6 +56,14 @@ namespace Battlefield_2_BitStream.Data
         {
             var archivePath = Path.Combine(Application.StartupPath, "mods", "bf2", Convert.ToString(variable));
             VFileSystemManager.MountArchive(Convert.ToString(variable2), archivePath);
+            return 0;
+        }
+        private static int i = 0;
+        public static int CreateObjectTemplate(object variable, object variable2)
+        {
+            if (Convert.ToString(variable2) == "Ladder" || Convert.ToString(variable) == "Ladder")
+                return 1;
+            i++;
             return 0;
         }
     }
