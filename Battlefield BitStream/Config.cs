@@ -1,4 +1,5 @@
-﻿using Battlefield_BitStream.Core.Engine;
+﻿using Battlefield_BitStream.Core.Data;
+using Battlefield_BitStream.Core.Engine;
 using Battlefield_BitStream.Core.Registry;
 using Battlefield_BitStream_Common;
 using Battlefield_BitStream_Common.GameEvents;
@@ -20,6 +21,8 @@ namespace Battlefield_BitStream
         internal static string ModName { get; private set; }
         internal static string GamePassword { get; private set; }
         internal static BF2Engine BF2Engine { get; private set; }
+        internal static Level PlayingLevel { get; set; }
+        internal static string ModPath { get; set; }
         internal static IEventRegistry EventRegistry { get; set; }
         internal static IMod LoadedMod { get; private set; }
         internal static Assembly ModAssembly { get; private set; }
@@ -53,6 +56,7 @@ namespace Battlefield_BitStream
                 }
                 ModName = "mods/" + mod;
                 ModAssembly = Assembly.Load(File.ReadAllBytes(Path.Combine(Application.StartupPath, ModName, "phoenixmod.dll")));
+                ModPath = Path.Combine(Application.StartupPath, ModName);
                 LoadedMod = (IMod)Activator.CreateInstance(ModAssembly.GetTypes().Where(x => x.GetInterfaces().Contains(typeof(IMod))).First());
                 ConFileProcessor = LoadedMod.GetConFileProcessor();
             }

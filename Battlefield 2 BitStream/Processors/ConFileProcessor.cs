@@ -21,6 +21,8 @@ namespace Battlefield_2_BitStream.Processors
             string[] commands;
             if (!File.Exists(file))
             {
+                if (file.StartsWith("/"))
+                    file = file.Substring(1);
                 var vfile = VFileSystemManager.GetFile(file);
                 if (vfile == null)
                     throw new Exception("File not found");

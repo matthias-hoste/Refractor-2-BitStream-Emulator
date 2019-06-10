@@ -5,6 +5,7 @@ using System.IO.Compression;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VFS.Core.Extensions;
 
 namespace VFS
 {
@@ -15,12 +16,13 @@ namespace VFS
         {
             _mounts = new Dictionary<string, VFileSystem>();
         }
-        public static void MountArchive(string mountPoint, string zip)
+        public static VFileSystem MountArchive(string mountPoint, string zip)
         {
             if (!_mounts.ContainsKey(mountPoint))
                 _mounts.Add(mountPoint, VFileSystem.Create(zip));
             else
                 _mounts[mountPoint].AddZip(zip);
+            return _mounts[mountPoint];
         }
         public static void UnMountArchive(string mountPoint)
         {
@@ -38,10 +40,24 @@ namespace VFS
             }
             return _fileList.ToArray();
         }
+        public static VFile GetFileByName(string file)
+        {
+            var ind = file.IndexOf('.');
+            var files = GetFilesByExtension(file.Substring(ind));
+            foreach(var vfile in files)
+            {
+                if (vfile.FileName.Contains(file))
+                    return vfile;
+            }
+            return null;
+        }
         public static VFile GetFile(string file)
         {
             var ind = file.IndexOf('/');
+            if (ind == -1)
+                return GetFileByName(file);//works since only 1 level is loaded
             var mount = file.Substring(0, ind);
+            mount = mount.FirstCharToUpper();//hacky fix
             if (!_mounts.ContainsKey(mount))
                 return null;
             return _mounts[mount].GetFile(file.Substring(ind + 1));

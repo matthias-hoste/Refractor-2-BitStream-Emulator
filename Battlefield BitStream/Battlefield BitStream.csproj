@@ -46,11 +46,13 @@
   <ItemGroup>
     <Compile Include="Config.cs" />
     <Compile Include="Core\Data\ClientInfo.cs" />
+    <Compile Include="Core\Data\Level.cs" />
     <Compile Include="Core\Data\PlayerAction.cs" />
     <Compile Include="Core\Data\RemoteEvent.cs" />
     <Compile Include="Core\Data\ServerInfo.cs" />
     <Compile Include="Core\Engine\BF2Engine.cs" />
     <Compile Include="Core\Extensions\ArrayExtensions.cs" />
+    <Compile Include="Core\Extensions\StringExtensions.cs" />
     <Compile Include="Core\Helpers\DevelopmentHelper.cs" />
     <Compile Include="Core\IO\BitStream.cs" />
     <Compile Include="Core\Managers\BlockEventManager.cs" />
