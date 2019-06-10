@@ -38,5 +38,13 @@ namespace VFS
             }
             return _fileList.ToArray();
         }
+        public static VFile GetFile(string file)
+        {
+            var ind = file.IndexOf('/');
+            var mount = file.Substring(0, ind);
+            if (!_mounts.ContainsKey(mount))
+                return null;
+            return _mounts[mount].GetFile(file.Substring(ind + 1));
+        }
     }
 }

@@ -21,6 +21,7 @@ namespace Battlefield_2_BitStream.Data
             processor.RegisterConMethod("sv.allowExternalViews", SetAllowExternalViews);
             processor.RegisterConMethod("fileManager.mountArchive", MountArchive);
             processor.RegisterConMethod("ObjectTemplate.create", CreateObjectTemplate);
+            processor.RegisterConMethod("run", RunConFile);
         }
         public static int SetServerName(object variable, object variable2)
         {
@@ -64,6 +65,11 @@ namespace Battlefield_2_BitStream.Data
             if (Convert.ToString(variable2) == "Ladder" || Convert.ToString(variable) == "Ladder")
                 return 1;
             i++;
+            return 0;
+        }
+        public static int RunConFile(object variable, object variable2)
+        {
+            Mod.Instance.GetConFileProcessor().ExecuteConFile(Convert.ToString(variable));
             return 0;
         }
     }

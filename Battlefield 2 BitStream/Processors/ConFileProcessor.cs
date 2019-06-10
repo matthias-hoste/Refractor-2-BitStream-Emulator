@@ -18,7 +18,18 @@ namespace Battlefield_2_BitStream.Processors
         }
         public void ExecuteConFile(string file)
         {
-            var commands = File.ReadAllLines(file);
+            string[] commands;
+            if (!File.Exists(file))
+            {
+                var vfile = VFileSystemManager.GetFile(file);
+                if (vfile == null)
+                    throw new Exception("File not found");
+                commands = vfile.ReadAllLines();
+            }
+            else
+            {
+                commands = File.ReadAllLines(file);
+            }
             foreach(var command in commands)
             {
                 var data = command.Split(' ');

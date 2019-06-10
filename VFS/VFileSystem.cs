@@ -43,6 +43,12 @@ namespace VFS
                 AddFile(zipEntry);
             }
         }
+        public VFile GetFile(string file)
+        {
+            if (!_files.ContainsKey(file))
+                return null;
+            return VFile.FromZipEntry(_files[file]);
+        }
         public VFile[] GetFilesByExtension(string extension)
         {
             var fileList = new List<VFile>();
