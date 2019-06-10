@@ -257,8 +257,21 @@ namespace Battlefield_BitStream.Core.Networking
                 }
             }
         }
-        public uint OnClientLoadComplete(uint a1, uint a2)
+        public uint OnClientLoadComplete(uint a1, uint a2)//now we must send the object database to the client
         {
+            var pre = new PostRemoteEvent()
+            {
+                EventId = 6,
+                FunctionId = 3
+            };
+            SendEvent(pre);
+            pre = new PostRemoteEvent()
+            {
+                EventId = 0,
+                FunctionId = 1
+            };
+            SendEvent(pre);
+            Send();
             return 0;
         }
     }
