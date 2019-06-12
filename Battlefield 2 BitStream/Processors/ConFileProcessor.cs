@@ -12,6 +12,7 @@ namespace Battlefield_2_BitStream.Processors
     public class ConFileProcessor : IConFileProcessor//this is a big fat headache
     {
         private Dictionary<string, Func<object, object, int>> registeredMethods { get; set; }
+        private bool InIf = false;
         public ConFileProcessor()
         {
             registeredMethods = new Dictionary<string, Func<object, object, int>>();
@@ -38,6 +39,20 @@ namespace Battlefield_2_BitStream.Processors
                 if (string.IsNullOrEmpty(data[0]) || string.IsNullOrWhiteSpace(data[0]))
                     continue;
                 if (data[0].StartsWith("rem"))
+                    continue;
+                if(data[0] == "if")
+                {
+                    InIf = true;
+                    continue;
+                }
+                if(InIf && (data[0] == "else" || data[0] == "endIf"))
+                {
+                    InIf = false;
+                    continue;
+                }
+                if (InIf)
+                    continue;
+                if (data[0] == "endIf")
                     continue;
                 if (!registeredMethods.ContainsKey(data[0]))
                 {
@@ -81,6 +96,20 @@ namespace Battlefield_2_BitStream.Processors
                 if (string.IsNullOrEmpty(data[0]) || string.IsNullOrWhiteSpace(data[0]))
                     continue;
                 if (data[0].StartsWith("rem"))
+                    continue;
+                if (data[0] == "if")
+                {
+                    InIf = true;
+                    continue;
+                }
+                if (InIf && (data[0] == "else" || data[0] == "endIf"))
+                {
+                    InIf = false;
+                    continue;
+                }
+                if (InIf)
+                    continue;
+                if (data[0] == "endIf")
                     continue;
                 if (!registeredMethods.ContainsKey(data[0]))
                 {

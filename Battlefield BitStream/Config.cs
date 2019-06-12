@@ -21,14 +21,12 @@ namespace Battlefield_BitStream
         internal static string ModName { get; private set; }
         internal static string GamePassword { get; private set; }
         internal static BF2Engine BF2Engine { get; private set; }
-        internal static Level PlayingLevel { get; set; }
         internal static string ModPath { get; set; }
         internal static IEventRegistry EventRegistry { get; set; }
         internal static IMod LoadedMod { get; private set; }
         internal static Assembly ModAssembly { get; private set; }
         internal static IConFileProcessor ConFileProcessor { get; private set; }
         internal static IBlockEvent ServerInfo { get; set; }
-        internal static IBlockEvent MapList { get; set; }
         internal static void Initialize(string[] args = null)
         {
             if(args != null)
@@ -40,7 +38,8 @@ namespace Battlefield_BitStream
                 }
             }
             EventRegistry = new GameEventRegistry();
-            if(string.IsNullOrEmpty(ModName))
+            BF2Engine = new BF2Engine();
+            if (string.IsNullOrEmpty(ModName))
             {
                 Console.WriteLine("No mod was defined, which mod would you like to load?");
                 var directories = Directory.EnumerateDirectories(Path.Combine(Application.StartupPath, "mods")).Select(d => new DirectoryInfo(d).Name);
@@ -60,9 +59,8 @@ namespace Battlefield_BitStream
                 LoadedMod = (IMod)Activator.CreateInstance(ModAssembly.GetTypes().Where(x => x.GetInterfaces().Contains(typeof(IMod))).First());
                 ConFileProcessor = LoadedMod.GetConFileProcessor();
             }
-            LoadedMod.Initialize(EventRegistry);
+            LoadedMod.Initialize(BF2Engine, EventRegistry);
             Console.WriteLine("Loaded " + LoadedMod.Name);
-            BF2Engine = new BF2Engine();
             BF2Engine.InitEngine();
             BF2Engine.LoadServerArchives();
         }

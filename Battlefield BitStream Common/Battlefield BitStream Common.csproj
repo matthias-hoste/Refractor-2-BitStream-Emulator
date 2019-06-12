@@ -42,6 +42,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\ILevel.cs" />
+    <Compile Include="Data\IMap.cs" />
+    <Compile Include="Engine\IBF2Engine.cs" />
     <Compile Include="Enums\BlockEventId.cs" />
     <Compile Include="Enums\PacketType.cs" />
     <Compile Include="GameEvents\IBlockEvent.cs" />
@@ -58,9 +61,7 @@
     <Compile Include="Processors\IConFileProcessor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\VFS\VFS.csproj">
       <Project>{7dba4cc5-645d-4514-add6-685eda4f361d}</Project>

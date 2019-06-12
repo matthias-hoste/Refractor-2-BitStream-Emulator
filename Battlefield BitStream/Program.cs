@@ -22,9 +22,8 @@ namespace Battlefield_BitStream
         static void Main(string[] args)
         {
             Config.Initialize(args);
+            Config.BF2Engine.LoadLevel(Config.BF2Engine.MapList[0]);//load the first level in the list
             var netServer = new NetworkingServer();
-            /*Config.PlayingLevel = Level.LoadLevel("Strike_at_Karkand");
-            Config.PlayingLevel.InitLevel();*/
             /*var fileName = VFileSystemManager.GetFileByName("ladder_4m.con");
             var files = VFileSystemManager.GetFilesByExtension(".con");
             int i = 0;

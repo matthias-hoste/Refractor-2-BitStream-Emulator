@@ -72,7 +72,7 @@ namespace Battlefield_BitStream.Core.Networking
             }
             else if(obj.BlockEventId == BlockEventId.MapList)
             {
-                Config.MapList = obj;
+                
             }
             else
             {
@@ -127,7 +127,6 @@ namespace Battlefield_BitStream.Core.Networking
                             v54 <<= v11 - 1;
                         }
                         v54 = 2 * v54 | 1;
-                        Console.WriteLine("Received, type 1: " + Convert.ToString(clientPacketCounter) + ", type 2: " + Convert.ToString(t1) + ", type 3: " + Convert.ToString(t3));
                         ClientPacketId = clientPacketCounter;
                         var packetLength = stream.ReadBits(16);//payload length in bytes
                         new PlayerActionManager().ProcessReceivedPacket(stream);
@@ -252,8 +251,7 @@ namespace Battlefield_BitStream.Core.Networking
                 if (Config.ServerInfo != null)
                 {
                     Config.ServerInfo.Transmit(this);
-                    //new ServerInfoEvent().Transmit(this);
-                    new MapListEvent(true).Transmit(this);
+                    new MapListEvent().Transmit(this);//send the maplist to the client
                 }
             }
         }

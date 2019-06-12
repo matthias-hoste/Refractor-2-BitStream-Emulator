@@ -32,7 +32,7 @@ namespace Battlefield_BitStream.Core.Networking
             uint SIO_UDP_CONNRESET = IOC_IN | IOC_VENDOR | 12;
             _serverSocket.IOControl((int)SIO_UDP_CONNRESET, new byte[] { Convert.ToByte(false) }, null);
             _newPackets = new ConcurrentQueue<NewPacketStruct>();
-            _serverSocket.Bind(new IPEndPoint(IPAddress.Any, 0));
+            _serverSocket.Bind(new IPEndPoint(IPAddress.Any, (int)Config.BF2Engine.ServerPort));
             Console.WriteLine("[NetworkingServer] bound to " + _serverSocket.LocalEndPoint.ToString());
             for (int i = 0; i < 5; i++)
             {

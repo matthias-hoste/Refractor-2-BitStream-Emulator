@@ -1,4 +1,5 @@
 ﻿using Battlefield_2_BitStream.Data;
+using Battlefield_BitStream_Common.Data;
 using Battlefield_BitStream_Common.Enums;
 using Battlefield_BitStream_Common.GameEvents;
 using Battlefield_BitStream_Common.IO;
@@ -13,20 +14,11 @@ namespace Battlefield_2_BitStream.BlockEvents
 {
     public class MapListEvent : IBlockEvent
     {
-        public List<Map> Maps { get; set; }
+        public List<IMap> Maps { get; set; }
         public BlockEventId BlockEventId => BlockEventId.MapList;
         public MapListEvent()
         {
-            Maps = new List<Map>();
-        }
-        public MapListEvent(bool addMap = false)
-        {
-            Maps = new List<Map>();
-            if (addMap)
-            {
-                Maps.Add(new Map() { GameMode = "gpm_cq", MaxPlayers = 0, MapName = "strike_at_karkand" });
-                Maps.Add(new Map() { GameMode = "gpm_cq", MaxPlayers = 64, MapName = "kubra_dam" });
-            }
+            Maps = new List<IMap>();
         }
         public void Process(INetworkingClient client)
         {
@@ -39,7 +31,7 @@ namespace Battlefield_2_BitStream.BlockEvents
         public void Serialize(IBitStream stream)//datablock events are different from game events
         {
             stream.WriteBits((uint)Maps.Count, 16);
-            foreach(var map in Maps)
+            foreach(var map in Mod.BF2Engine.MapList)
             {
                 stream.WriteBits(map.MaxPlayers, 16);
                 stream.WriteBits((uint)map.MapName.Length, 16);

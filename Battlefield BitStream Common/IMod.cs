@@ -1,4 +1,5 @@
-﻿using Battlefield_BitStream_Common.GameEvents;
+﻿using Battlefield_BitStream_Common.Engine;
+using Battlefield_BitStream_Common.GameEvents;
 using Battlefield_BitStream_Common.IO;
 using Battlefield_BitStream_Common.Processors;
 using System;
@@ -15,7 +16,7 @@ namespace Battlefield_BitStream_Common
         bool RequiresChallenge { get; }
         Type ChallengeEvent { get; }
         IBitStreamExtension BitStreamExtension { get; }
-        void Initialize(IEventRegistry registry);
+        void Initialize(IBF2Engine engine, IEventRegistry registry);
         IConFileProcessor GetConFileProcessor();
     }
 }

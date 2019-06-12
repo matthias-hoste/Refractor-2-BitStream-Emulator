@@ -2,6 +2,7 @@
 using Battlefield_2_BitStream.GameEvents;
 using Battlefield_2_BitStream.Processors;
 using Battlefield_BitStream_Common;
+using Battlefield_BitStream_Common.Engine;
 using Battlefield_BitStream_Common.GameEvents;
 using Battlefield_BitStream_Common.IO;
 using Battlefield_BitStream_Common.Processors;
@@ -28,6 +29,8 @@ namespace Battlefield_2_BitStream
 
         private static IConFileProcessor _instance { get; set; }
 
+        internal static IBF2Engine BF2Engine { get; private set; }
+
         public Mod()
         {
             Instance = this;
@@ -41,8 +44,9 @@ namespace Battlefield_2_BitStream
             return _instance;
         }
 
-        public void Initialize(IEventRegistry registry)
+        public void Initialize(IBF2Engine engine, IEventRegistry registry)
         {
+            BF2Engine = engine;
             registry.Register(1, typeof(ChallengeEvent));
             registry.Register(2, typeof(ChallengeResponseEvent));
             registry.Register(3, typeof(ConnectionTypeEvent));

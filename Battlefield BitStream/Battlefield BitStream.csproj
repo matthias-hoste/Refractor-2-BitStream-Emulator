@@ -53,6 +53,7 @@
     <Compile Include="Core\Engine\BF2Engine.cs" />
     <Compile Include="Core\Extensions\ArrayExtensions.cs" />
     <Compile Include="Core\Extensions\StringExtensions.cs" />
+    <Compile Include="Core\Game\World.cs" />
     <Compile Include="Core\Helpers\DevelopmentHelper.cs" />
     <Compile Include="Core\IO\BitStream.cs" />
     <Compile Include="Core\Managers\BlockEventManager.cs" />
