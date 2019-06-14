@@ -28,12 +28,12 @@ namespace Battlefield_2_BitStream.GameEvents
 
         public IGameEvent DeSerialize(IBitStream stream)
         {
-            var v1 = stream.ReadBits(0x20);
-            var v2 = stream.ReadBits(0x10);
+            var templateId = stream.ReadBits(0x20);
+            var objectId = stream.ReadBits(0x10);
             var v3 = stream.ReadBits(0x20);
             var v4 = stream.ReadBits(0x20);
             var v5 = stream.ReadBits(0x20);
-            var v6 = stream.ReadBits(4);
+            var kitId = stream.ReadBits(4);
             var v7 = stream.ReadBits(4);
             return null;
         }
