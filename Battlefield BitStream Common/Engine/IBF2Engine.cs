@@ -14,6 +14,7 @@ namespace Battlefield_BitStream_Common.Engine
         ILevel Level { get; }
         void InitEngine();
         void LoadServerArchives();
+        void LoadKitData();
         void LoadLevel(IMap map);
         void SetServerPort(uint port);
     }

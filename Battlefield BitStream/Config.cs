@@ -1,6 +1,7 @@
 ﻿using Battlefield_BitStream.Core.Data;
 using Battlefield_BitStream.Core.Engine;
 using Battlefield_BitStream.Core.Registry;
+using Battlefield_BitStream.Forms;
 using Battlefield_BitStream_Common;
 using Battlefield_BitStream_Common.GameEvents;
 using Battlefield_BitStream_Common.Processors;
@@ -36,6 +37,8 @@ namespace Battlefield_BitStream
                 {
                     if (args[i] == "--mod" && Directory.Exists(Path.Combine(Application.StartupPath, "mods", args[i + 1])))
                         ModName = args[i + 1];
+                    if (args[i] == "--visisble3d")//this opens a form and renders the gameplay in realtime(will certainly make it slower)
+                        new FrmMain().Show();
                 }
             }
             EventRegistry = new GameEventRegistry();

@@ -19,6 +19,7 @@ namespace Battlefield_BitStream.Core.Managers
             uint someVal2 = stream.ReadBits(8);
             uint someVal3 = stream.ReadBits(1);
             ReadControlObjectState(stream);
+            ReadData(stream);
             return 0;
         }
         public virtual int ReadData(IBitStream stream)

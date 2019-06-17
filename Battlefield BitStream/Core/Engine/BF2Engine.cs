@@ -15,6 +15,7 @@ namespace Battlefield_BitStream.Core.Engine
         public uint ServerPort { get; private set; }
         public List<IMap> MapList { get; private set; }
         public ILevel Level { get; private set; }
+        private bool _zipsMounted { get; set; }
         public BF2Engine()
         {
             MapList = new List<IMap>();
@@ -32,6 +33,13 @@ namespace Battlefield_BitStream.Core.Engine
         {
             var archivesPath = Path.Combine(Application.StartupPath, Config.ModName, "ServerArchives.con");
             Config.ConFileProcessor.ExecuteConFile(archivesPath);
+            _zipsMounted = true;
+        }
+        public void LoadKitData()
+        {
+            if (!_zipsMounted)
+                throw new Exception("Mount data first");
+
         }
         public void LoadLevel(IMap map)
         {
