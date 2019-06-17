@@ -27,10 +27,10 @@ namespace Battlefield_2_BitStream.BlockEvents
         {
             if(make)
             {
-                MapName = Mod.BF2Engine.Level.Map.MapName;
+                MapName = "kubra_dam";
                 MapPath = "Levels/";
-                GameMode = Mod.BF2Engine.Level.Map.GameMode;
-                MaxPlayers = Mod.BF2Engine.Level.Map.MaxPlayers;
+                GameMode = "gpm_cq";
+                MaxPlayers = 64;
                 CommanderEnabled = 1;
                 ChallengeOrdinal = 1;
             }

@@ -135,6 +135,14 @@ namespace Battlefield_BitStream.Core.Managers
                     stream.ReadBits(0x10);//just read so we can skip
                     eventInstance = null;
                 }
+                else if (eventId == 56)
+                {
+                    eventInstance = new BeginRoundEvent().DeSerialize(stream);
+                }
+                else if (eventId == 57)
+                {
+                    eventInstance = new CreateSpawnGroupEvent().DeSerialize(stream);
+                }
                 else
                 {
                     eventInstance = null;

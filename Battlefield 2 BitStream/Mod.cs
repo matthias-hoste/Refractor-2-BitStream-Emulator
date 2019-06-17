@@ -29,7 +29,7 @@ namespace Battlefield_2_BitStream
 
         private static IConFileProcessor _instance { get; set; }
 
-        internal static IBF2Engine BF2Engine { get; private set; }
+        internal IBF2Engine BF2Engine { get; private set; }
 
         public Mod()
         {
@@ -47,6 +47,8 @@ namespace Battlefield_2_BitStream
         public void Initialize(IBF2Engine engine, IEventRegistry registry)
         {
             BF2Engine = engine;
+            if (BF2Engine == null)
+                throw new Exception();
             registry.Register(1, typeof(ChallengeEvent));
             registry.Register(2, typeof(ChallengeResponseEvent));
             registry.Register(3, typeof(ConnectionTypeEvent));

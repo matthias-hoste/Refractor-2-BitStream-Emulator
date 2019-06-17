@@ -59,7 +59,7 @@ namespace Battlefield_2_BitStream.Data
         }
         public static int SetServerPort(object variable, object variable2)
         {
-            Mod.BF2Engine.SetServerPort(Convert.ToUInt32(variable));
+            Mod.Instance.BF2Engine.SetServerPort(Convert.ToUInt32(variable));
             return 0;
         }
         public static int MountArchive(object variable, object variable2)
@@ -95,7 +95,7 @@ namespace Battlefield_2_BitStream.Data
             map.MapName = Convert.ToString(variable);
             map.GameMode = Convert.ToString(variable2);
             map.MaxPlayers = 64;//hardcode for now
-            Mod.BF2Engine.MapList.Add(map);
+            Mod.Instance.BF2Engine.MapList.Add(map);
             return 0;
         }
     }

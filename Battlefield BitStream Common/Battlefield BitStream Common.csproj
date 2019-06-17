@@ -56,6 +56,8 @@
     <Compile Include="Managers\IBlockEventManager.cs" />
     <Compile Include="Managers\IDataBlockManager.cs" />
     <Compile Include="Managers\IGameEventManager.cs" />
+    <Compile Include="Managers\IObjectManager.cs" />
+    <Compile Include="Managers\IObjectTemplateManager.cs" />
     <Compile Include="Managers\IRemoteEventManager.cs" />
     <Compile Include="Networking\INetworkingClient.cs" />
     <Compile Include="Processors\IConFileProcessor.cs" />

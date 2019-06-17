@@ -26,7 +26,7 @@ namespace Battlefield_2_BitStream.Processors
                     file = file.Substring(1);
                 var vfile = VFileSystemManager.GetFile(file);
                 if (vfile == null)
-                    throw new Exception("File not found");
+                    return;//return for now, so we can actually load
                 commands = vfile.ReadAllLines();
             }
             else

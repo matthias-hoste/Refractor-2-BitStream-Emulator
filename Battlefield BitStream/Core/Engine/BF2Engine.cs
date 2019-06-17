@@ -36,7 +36,7 @@ namespace Battlefield_BitStream.Core.Engine
         public void LoadLevel(IMap map)
         {
             Level = Data.Level.LoadLevel(map);
-            Level.InitLevel();
+            //Level.InitLevel();
         }
         public void SetServerPort(uint port)
         {

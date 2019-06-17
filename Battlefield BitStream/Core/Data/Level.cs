@@ -25,6 +25,7 @@ namespace Battlefield_BitStream.Core.Data
         public void InitLevel()
         {
             Config.ConFileProcessor.ExecuteConFile(LevelFileSystem.GetFile("Init.con"));
+            Config.ConFileProcessor.ExecuteConFile(LevelFileSystem.GetFile("StaticObjects.con"));
         }
         public static Level LoadLevel(IMap map)
         {

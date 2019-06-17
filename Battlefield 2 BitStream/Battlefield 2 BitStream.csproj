@@ -50,6 +50,7 @@
     <Compile Include="Data\ConMethods.cs" />
     <Compile Include="Data\Map.cs" />
     <Compile Include="Data\ServerInfo.cs" />
+    <Compile Include="GameEvents\BeginRoundEvent.cs" />
     <Compile Include="GameEvents\ChallengeEvent.cs" />
     <Compile Include="GameEvents\ChallengeResponseEvent.cs" />
     <Compile Include="GameEvents\ConnectionTypeEvent.cs" />
@@ -57,6 +58,7 @@
     <Compile Include="GameEvents\CreateKitEvent.cs" />
     <Compile Include="GameEvents\CreateObjectEvent.cs" />
     <Compile Include="GameEvents\CreatePlayerEvent.cs" />
+    <Compile Include="GameEvents\CreateSpawnGroupEvent.cs" />
     <Compile Include="GameEvents\DataBlockEvent.cs" />
     <Compile Include="GameEvents\DestroyObjectEvent.cs" />
     <Compile Include="GameEvents\PostRemoteEvent.cs" />

@@ -30,14 +30,26 @@ namespace Battlefield_2_BitStream.BlockEvents
         }
         public void Serialize(IBitStream stream)//datablock events are different from game events
         {
-            stream.WriteBits((uint)Maps.Count, 16);
-            foreach(var map in Mod.BF2Engine.MapList)
+            if(Mod.Instance == null)
             {
-                stream.WriteBits(map.MaxPlayers, 16);
-                stream.WriteBits((uint)map.MapName.Length, 16);
-                stream.WriteString(map.MapName, (uint)map.MapName.Length);
-                stream.WriteBits((uint)map.GameMode.Length, 16);
-                stream.WriteString(map.GameMode, (uint)map.GameMode.Length);
+                stream.WriteBits(1, 16);
+                stream.WriteBits(64, 16);
+                stream.WriteBits((uint)"kubra_dam".Length, 16);
+                stream.WriteString("kubra_dam", (uint)"kubra_dam".Length);
+                stream.WriteBits((uint)"gpm_cq".Length, 16);
+                stream.WriteString("gpm_cq", (uint)"gpm_cq".Length);
+            }
+            else
+            {
+                stream.WriteBits((uint)Mod.Instance.BF2Engine.MapList.Count, 16);
+                foreach(var map in Mod.Instance.BF2Engine.MapList)
+                {
+                    stream.WriteBits(map.MaxPlayers, 16);
+                    stream.WriteBits((uint)map.MapName.Length, 16);
+                    stream.WriteString(map.MapName, (uint)map.MapName.Length);
+                    stream.WriteBits((uint)map.GameMode.Length, 16);
+                    stream.WriteString(map.GameMode, (uint)map.GameMode.Length);
+                }
             }
         }
         public IBlockEvent DeSerialize(IBitStream stream)
