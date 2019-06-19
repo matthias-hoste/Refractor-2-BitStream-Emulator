@@ -50,6 +50,7 @@
     <Compile Include="Data\ConMethods.cs" />
     <Compile Include="Data\Map.cs" />
     <Compile Include="Data\ServerInfo.cs" />
+    <Compile Include="Enums\ClassIds.cs" />
     <Compile Include="GameEvents\BeginRoundEvent.cs" />
     <Compile Include="GameEvents\ChallengeEvent.cs" />
     <Compile Include="GameEvents\ChallengeResponseEvent.cs" />
@@ -79,9 +80,7 @@
       <Name>VFS</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Enums\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>copy "$(TargetPath)" "$(TargetDir)phoenixmod.dll" /Y</PostBuildEvent>
