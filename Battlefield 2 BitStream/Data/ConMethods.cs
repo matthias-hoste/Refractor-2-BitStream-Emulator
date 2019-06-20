@@ -82,6 +82,8 @@ namespace Battlefield_2_BitStream.Data
             if (Convert.ToString(variable) == "ladder_4m")
                 return 1;
             p++;
+            if (p == 642)
+                return 1;
             return 0;
         }
         public static int RunConFile(object variable, object variable2)

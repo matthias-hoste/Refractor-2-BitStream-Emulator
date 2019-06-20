@@ -22,6 +22,8 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -36,11 +38,17 @@
     <Reference Include="SharpDX, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
       <HintPath>..\packages\SharpDX.4.2.0\lib\net45\SharpDX.dll</HintPath>
     </Reference>
+    <Reference Include="SharpDX.Direct2D1, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpDX.Direct2D1.4.2.0\lib\net45\SharpDX.Direct2D1.dll</HintPath>
+    </Reference>
     <Reference Include="SharpDX.Direct3D11, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
       <HintPath>..\packages\SharpDX.Direct3D11.4.2.0\lib\net45\SharpDX.Direct3D11.dll</HintPath>
     </Reference>
     <Reference Include="SharpDX.DXGI, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
       <HintPath>..\packages\SharpDX.DXGI.4.2.0\lib\net45\SharpDX.DXGI.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.Mathematics, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b4dcf0f35e5521f1, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpDX.Mathematics.4.2.0\lib\net45\SharpDX.Mathematics.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -55,6 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Config.cs" />
+    <Compile Include="Core\3D\TextureManager.cs" />
     <Compile Include="Core\Data\ClientInfo.cs" />
     <Compile Include="Core\Data\Level.cs" />
     <Compile Include="Core\Data\PlayerAction.cs" />
@@ -75,6 +84,7 @@
     <Compile Include="Core\Managers\RemoteEventManager.cs" />
     <Compile Include="Core\Networking\NetworkingClient.cs" />
     <Compile Include="Core\Networking\NetworkingServer.cs" />
+    <Compile Include="Core\Objects\Template.cs" />
     <Compile Include="Core\Registry\GameEventRegistry.cs" />
     <Compile Include="Core\Structs\NewPacketStruct.cs" />
     <Content Include="info.txt" />
@@ -100,12 +110,20 @@
       <Project>{933C37F3-3886-4052-9F6A-6E3AB3665AEC}</Project>
       <Name>Battlefield BitStream Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\BBSV\BBSV.csproj">
+      <Project>{cc8305f0-f5e4-44a5-a5f5-9f16deb0e795}</Project>
+      <Name>BBSV</Name>
+    </ProjectReference>
     <ProjectReference Include="..\VFS\VFS.csproj">
       <Project>{7dba4cc5-645d-4514-add6-685eda4f361d}</Project>
       <Name>VFS</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Forms\FrmMain.resx">
+      <DependentUpon>FrmMain.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>

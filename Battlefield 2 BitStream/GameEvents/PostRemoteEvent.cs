@@ -24,7 +24,7 @@ namespace Battlefield_2_BitStream.GameEvents
 
         public void Transmit(INetworkingClient client)
         {
-            throw new NotImplementedException();
+            client.SendEvent(this);
         }
 
         public void Process(INetworkingClient client)

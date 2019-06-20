@@ -41,9 +41,9 @@ namespace Battlefield_2_BitStream.GameEvents
                 var v5 = stream.ReadBits(1);
                 if(v5 == 1)
                 {
-                    var v6 = stream.ReadBits(0x20);
-                    var v7 = stream.ReadBits(0x20);
-                    var v8 = stream.ReadBits(0x20);
+                    var v6 = stream.ReadBits(0x20) ^ 0x80000000;
+                    var v7 = stream.ReadBits(0x20) ^ 0x80000000;
+                    var v8 = stream.ReadBits(0x20) ^ 0x80000000;
                     var v222 = 0;
                 }
                 else
@@ -53,9 +53,9 @@ namespace Battlefield_2_BitStream.GameEvents
                 var hasVector = stream.ReadBool();
                 if(hasVector)
                 {
-                    var v6 = stream.ReadBits(0x20);
-                    var v7 = stream.ReadBits(0x20);
-                    var v8 = stream.ReadBits(0x20);
+                    var v6 = stream.ReadBits(0x20) ^ 0x80000000;
+                    var v7 = stream.ReadBits(0x20) ^ 0x80000000;
+                    var v8 = stream.ReadBits(0x20) ^ 0x80000000;
                     var v222 = 0;
                 }
                 else

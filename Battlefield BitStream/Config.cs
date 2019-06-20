@@ -38,7 +38,7 @@ namespace Battlefield_BitStream
                     if (args[i] == "--mod" && Directory.Exists(Path.Combine(Application.StartupPath, "mods", args[i + 1])))
                         ModName = args[i + 1];
                     if (args[i] == "--visisble3d")//this opens a form and renders the gameplay in realtime(will certainly make it slower, well, unsure. Since otherwise it would be rendered in memory)
-                        new FrmMain().Show();
+                        new FrmMain().Show();//requires client zips
                 }
             }
             EventRegistry = new GameEventRegistry();
